@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>The Distress Signal From Beneath the Sea</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="script.js" defer></script>
+    </head>
+<body> 
+    <!--header-->
+     <header class="game-header">
+        <h1>The Distress Signal Beneath the Sea</h1>
+        <p>An Interactive Underwater Mystery</p>
+    </header>   
+
+    <!--progress display-->
+    <div class="progress-display">
+        <span id="fragment-count">Fragments: 0 / 2</span>
+        <span id="signal-status">Signal : Unknown</span>
+    </div>
+
+    <main id="game">
+        <!--Scene 1: Shore-->
+        <section id="shore" class="scene active">
+            <div class="scene-content">
+                <p class="chapter">Chapter 01</p>
+                <h2>The Shore</h2>
+
+                <p>
+                    A violent storm has just passed. 
+                    Along the coast, an abandoned radio begins
+                    transmitting a mysterious distress signal. 
+                </p>
+
+                <p>
+                    The transmission is dated ten years ago. 
+                    Someone may still be waiting for help.
+                </p>
+
+                <div class="radio-panel">
+                    <h3>Distress Radio</h3>
+                    <div id="radio-frequency">070.0 MHz</div>
+                    
+                    <div class="radio-controls">
+                        <button id="frequency-down">-</button>
+                        <button id="frequency-up">+</button>
+                    </div>
+
+                    <p id="radio-message">
+                        Static fills the speakers...
+                    </p>
+                </div>
+
+                <div class="navigation">
+                    <button id="dive-button" disabled>
+                        Begin Dive
+                    </button>
+                    <button id="leave-shore">
+                        Ignore the Signal
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!--Scene 2: Shallow Water-->
+        <section id="shallow-water" class="scene">
+            <div class="scene-content">
+                <p class="chapter">Chapter 02</p>
+                <h2>Shallow Water</h2>
+
+                <p>
+                    Sunlight fades beneath the surface.
+                    Schools of fish move through the reef. 
+                    One fish carries something unusual. 
+                </p>
+
+                <div class="exploration-area">
+                    <button id="marked-fish" class="image-button"
+                        aria-label="Investigate the marked fish">
+                        <img src="images/marked-fish.png"
+                        alt="A fish carrying a numbered fragment">
+                    </button>
+                </div>
+
+                <p id="fish-message">
+                    Look carefully at the fish.
+                </p>
+
+                <div class="navigation">
+                    <button id="water-to-buoy">
+                        Investigate Signal Buoy
+                    </button>
+
+                     <button id="water-to-wreck">
+                        Explore Shipwreck
+                    </button>
+                    
+                    <button id="water-to-shore">
+                        Return to Shore
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!--Scene 3: Signal Buoy-->
+        <section id="signal-buoy" class="scene">
+            <div class="scene-content">
+                <p class="chapter">CHAPTER 03</p>
+                <h2>The Signal Buoy</h2>
+
+                <p>
+                    An old research buoy rests beneath the surface.
+                    Its antenna is damaged, but the equipment
+                    still responds.
+                </p>
+
+                <div class="photo-panel">
+                    <h3>Research Archive</h3>
+                    
+                    <img id="buoy-photo"
+                        src="images/buoy-old.jpg"
+                        alt="Historical photograph of the buoy">
+
+                    <button id="switch-photo">
+                        Compare Photographs
+                    </button>
+
+                    <p id="photo-message">
+                        An old photograph of the research buoy.
+                    </p>
+                </div>
+
+                <div class="antenna-panel">
+                    <h3>Adjust the Antenna</h3>
+
+                    <div class="antenna-controls">
+                        <button id="antenna-left">←</button>
+                        <span id="antenna-position">Position: 0</span>
+                        <button id="antenna-right">→</button>
+                    </div>
+
+                    <p id="antenna-message">
+                        The signal is too weak to decode.
+                    </p>
+                </div>
+
+                <div class="navigation">
+                    <button id="buoy-to-water">
+                        Return to Shallow Water
+                    </button>
+
+                    <button id="buoy-to-wreck">
+                        Explore the Shipwreck
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!--Scene 4: Shipwreck-->
+
+        <section id="shipwreck" class="scene">
+            <div class="scene-content">
+                <p class="chapter">CHAPTER 04</p>
+                <h2>The Shipwreck</h2>
+
+                <p>
+                    A research vessel lies abandoned on the 
+                    ocean floor. Debris blocks the entrance to 
+                    its cabin.
+                </p>
+
+                <div class="exploration-area">
+                    <button id="debris" class="image-button"
+                        aria-label="Move the debris">
+                        <img src="images/debris.png"
+                            alt="Debris covering part of the shipwreck">
+                    </button>
+                </div>
+
+                <p id="debris-message">
+                    Something appears to be hidden underneath...
+                </p>
+
+                <div class="cabin-panel">
+                    <h3>Locked Cabin</h3>
+
+                    <p>Enter the four-digit access code</p>
+
+                    <input 
+                        type="text"
+                        id="cabin-code"
+                        inputmode="numeric"
+                        maxlength="4"
+                        placeholder="0000"
+                        aria-label="Cabin access code">
+
+                    <button id="open-cabin">
+                        Open Cabin
+                    </button>
+
+                    <p id="cabin-message" aria-live="polite"></P>
+                </div>
+
+                <div class="navigation">
+                    <button id="wreck-to-water">
+                        Return to Shallow Water
+                    </button>
+                    <button id="wreck-to-buoy">
+                        Investigate the Signal Buoy
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!--Scene 5: Ship Interior-->
+        <section id="ship-interior" class="scene">
+            <div class="scene-content">
+                <p class="chapter">CHAPTER 05</p>
+                <h2>Inside the Vessel</h2>
+                
+                <p>
+                    Inside the cabin, you discover an abandoned 
+                    research station. A logbook, audio recording, 
+                    and photographs remain intact. 
+                </p>
+
+                <div class="evidence-panel">
+                    <h3>Research Evidence</h3>
+
+                    <button id="read-log">
+                        Read Research Log
+                    </button>
+
+                    <button id="play-recording">
+                        Play Recorded Message 
+                    </button>
+
+                    <div id="evidence-message" aria-live="polite">
+                        Select an item to investigate
+                    </div>
+
+                </div>
+
+                <div class="photo-puzzle">
+                    <h3>Voyage Photographs</h3>
+
+                    <p>
+                        Arrange the photographs in chronological order.
+                    </p>
+
+                    <div class="voyage-photos">
+                        <img id="voyage-photo-1"
+                            src="images/voyage-1.jpg"
+                            alt="First displayed voyage photograph">
+
+                        <img id="voyage-photo-2"
+                            src="images/voyage-2.jpg"
+                            alt="Second displayed voyage photograph">
+
+                        <img id="voyage-photo-3"
+                            src="images/voyage-3.jpg"
+                            alt="Third displayed voyage photograph">
+                    </div>
+
+                    <button id="next-photo-order">
+                        Change Photo Order
+                    </button>
+
+                    <p id="photo-order-message">
+                        The photographs appear to be out of order.
+                    </p>
+                </div>
+
+                <div class="navigation">
+                    <button id="interior-to-wreck">
+                        Return to Shipwreck
+                    </button>
+
+                    <button id="finish-investigation">
+                        Finish Investigation
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    <!-- Scene 6: Ending -->
+    <section id="ending" class="scene">
+
+      <div class="scene-content">
+        <p class="chapter">FINAL CHAPTER</p>
+        <h2>The Truth Beneath the Sea</h2>
+
+        <p>
+          The researcher's final recording
+          reveals what happened aboard the vessel.
+        </p>
+
+        <p>
+          The crew discovered evidence of
+          illegal waste dumping.
+          The researcher survived and hid
+          her findings before abandoning the ship.
+        </p>
+
+        <h3>What will you do with the evidence?</h3>
+
+        <div class="ending-choices">
+            <button id="ending-leave">
+                Leave the Evidence
+            </button>
+
+            <button id="ending-report">
+                Hand Over the Evidence
+            </button>
+
+            <button id="ending-publish">
+                Publish the Full Report
+            </button>
+        </div>
+
+        <div id="ending-result" aria-live="polite"></div>
+
+            <button id="restart-game">
+            Restart Investigation
+            </button>
+        </div>
+    </section>
+
+  </main>
+
+  <!-- CLUE NOTIFICATION -->
+  <div id="notification" class="notification"
+       role="status" aria-live="polite"></div>
+
+</body>
+</html>
