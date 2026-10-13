@@ -103,13 +103,15 @@ function initializeGame() {
     }
   });
 
-  on("marked-fish", () => {
-    if (state.fragmentA) return showNotice("You already collected fragment 07.");
+ on("marked-fish", () => {
+  if (!state.fragmentA) {
     state.fragmentA = true;
-    say("fish-message", "Collected fragment 07. Its number may be part of a code.");
-    showNotice("Clue collected: fragment 07.");
-    updateProgress();
-  });
+    say("fish-message", "Fragment 07 collected.");
+    showNotice("Collected fragment 07!");
+  }
+  updateProgress();
+});
+
   $("marked-fish").addEventListener("mousemove", () => {
     if (!state.fragmentA) say("fish-message", "A metal tag is marked 07. Click the fish to collect it.");
   });
@@ -145,28 +147,35 @@ function initializeGame() {
   on("switch-photo", toggleBuoyPhoto);
   on("buoy-photo", toggleBuoyPhoto);
 
-  function updateAntenna() {
-    say("antenna-position", `Position: ${state.antennaPosition}`);
-    $("antenna-position").style.transform = `translateX(${state.antennaPosition * 8}px)`;
-    if (state.antennaPosition === 2 && !state.hasBuoyTime) {
-      state.hasBuoyTime = true;
-      showNotice("New clue: the recording time is 07:14.");
-    }
-    say("antenna-message", state.hasBuoyTime ? "Recording time decoded and saved: 07:14." :
-      "The signal is too weak to decode.");
-    updateProgress();
+
+function updateAntenna() {
+  say("antenna-position", `Position: ${state.antennaPosition}`);
+  if (state.antennaPosition === 2 && !state.hasBuoyTime) {
+    state.hasBuoyTime = true;
+    showNotice("New clue: the recording time is 07:14.");
   }
+  say(
+    "antenna-message",
+    state.hasBuoyTime
+      ? "Recording time decoded and saved: 07:14."
+      : "The signal is too weak to decode."
+  );
+  updateProgress();
+}
+
   on("antenna-left", () => { state.antennaPosition = Math.max(-2, state.antennaPosition - 1); updateAntenna(); });
   on("antenna-right", () => { state.antennaPosition = Math.min(2, state.antennaPosition + 1); updateAntenna(); });
 
-  on("debris", () => {
-    if (state.fragmentB) return showNotice("You already collected fragment 14.");
+on("debris", () => {
+  if (!state.fragmentB) {
     state.fragmentB = true;
     $("debris").classList.add("collected");
-    say("debris-message", "Collected fragment 14 from beneath the debris.");
-    showNotice("Clue collected: fragment 14.");
-    updateProgress();
-  });
+    say("debris-message", "Fragment 14 collected.");
+    showNotice("Collected fragment 14!");
+  }
+
+  updateProgress();
+});
 
   function openCabin() {
     const missing = [];

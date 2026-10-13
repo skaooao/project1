@@ -289,7 +289,6 @@ input {
 #buoy-photo { cursor: pointer; }
 #debris { transition: transform 250ms; }
 #debris.collected { transform: translate(18px, -8px); }
-#antenna-position { transition: transform 200ms; }
 #ending-back { margin-top: 18px; }
 #restart-game { margin-top: 18px; }
 .notification { pointer-events: none; }
@@ -310,4 +309,11 @@ dialog::backdrop { background: rgb(0 10 20 / 75%); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
+}
+
+#antenna-position {
+  display: inline-block;
+  width: 130px;
+  text-align: center;
+  transform: none !important;
 }
